@@ -1,0 +1,48 @@
+{
+  "name": "react-native-test",
+  "version": "1.0.0",
+  "description": "A boilerplate for playing around with react-native, redux and react-navigation.",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint '**/*.js' --ignore-pattern node_modules/"
+  },
+  "dependencies": {
+    "@babel/eslint-parser": "^7.5.4",
+    "axios": "^0.19.0",
+    "prop-types": "^15.8.1",
+    "react": "17.0.2",
+    "react-native": "0.68.2",
+    "react-native-gesture-handler": "^1.6.1",
+    "react-native-reanimated": "^2.8.0",
+    "react-native-screens": "^3.13.1",
+    "react-native-vector-icons": "^6.6.0",
+    "react-navigation": "^4.0.10",
+    "react-navigation-drawer": "^2.2.2",
+    "react-navigation-stack": "^1.9.4",
+    "react-redux": "^7.1.1",
+    "redux": "^4.0.4",
+    "redux-logger": "^3.0.6",
+    "redux-mock-store": "^1.5.3",
+    "redux-saga": "^1.1.1",
+    "seamless-immutable": "^7.1.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.12",
+    "@babel/runtime": "^7.17.9",
+    "@react-native-community/eslint-config": "^3.0.2",
+    "babel-jest": "^28.1.0",
+    "enzyme": "^2.9.1",
+    "eslint": "^8.15.0",
+    "jest": "^28.1.0",
+    "metro-react-native-babel-preset": "^0.70.3",
+    "prettier": "^2.6.2",
+    "react-test-renderer": "17.0.2"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
