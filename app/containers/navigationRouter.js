@@ -9,7 +9,7 @@ const MainStack = createStackNavigator({
     screen: timezoneListPage,
     navigationOptions: {
       headerStyle: {
-        height: 50,
+        borderBottomWidth: 0,
       },
     },
   },

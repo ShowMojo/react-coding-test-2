@@ -1,19 +1,16 @@
 import React from 'react';
-import {FlatList, RefreshControl} from 'react-native';
+import {FlatList, RefreshControl, View, Image, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import LogoutButtonComponent from '../components/logoutButtonComponent';
 import globals from '../globals';
 import {getTimezones, logout} from '../stores/actions';
 import TimeZoneItem from '../components/timeZoneItem';
+import styles from '../styles';
 
 class TimezoneListPage extends React.PureComponent {
   static navigationOptions = () => ({
-    headerTitle: 'Time Zones',
-    headerTitleStyle: {
-      paddingTop: 15,
-    },
-    headerRight: LogoutButtonComponent,
+    headerTitle: '',
   });
 
   constructor(props) {
@@ -35,18 +32,28 @@ class TimezoneListPage extends React.PureComponent {
     const keyExtractor = (item, index) => `${item.id}_${index}`;
     const renderItem = item => <TimeZoneItem timeZone={item} />;
     return (
-      <FlatList
-        refreshControl={
-          <RefreshControl
-            refreshing={this.props.Store.isTimeZonesFetching}
-            onRefresh={() => this.loadData()}
+      <View>
+        <View style={[styles.row, styles.spaceBetween]}>
+          <Image
+            style={componentStyles.mapImage}
+            source={require('../assets/worldmap.png')}
           />
-        }
-        showsVerticalScrollIndicator={false}
-        renderItem={({item}) => renderItem(item)}
-        data={this.props.Store.timeZones}
-        keyExtractor={keyExtractor}
-      />
+          <LogoutButtonComponent />
+        </View>
+        <FlatList
+          refreshControl={
+            <RefreshControl
+              refreshing={this.props.Store.isTimeZonesFetching}
+              onRefresh={() => this.loadData()}
+            />
+          }
+          ListFooterComponent={<View style={styles.flatListFooterContainer} />}
+          showsVerticalScrollIndicator={false}
+          renderItem={({item}) => renderItem(item)}
+          data={this.props.Store.timeZones}
+          keyExtractor={keyExtractor}
+        />
+      </View>
     );
   }
 }
@@ -66,3 +73,10 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimezoneListPage);
+
+const componentStyles = StyleSheet.create({
+  mapImage: {
+    height: 80,
+    width: 196,
+  },
+});

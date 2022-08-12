@@ -17,19 +17,19 @@ export default function LogoutButtonComponent() {
       },
     ]);
   };
+
   return (
-    <View>
-      <TouchableOpacity
-        style={[
-          styles.containerCenterHorizontally,
-          styles.containerCenterVertically,
-          styles.logoutButton,
-          styles.row,
-        ]}
-        onPress={onLogoutPress}>
-        <Text>Logout</Text>
-        <MaterialIcons style={styles.icon} name="logout" size={20} />
-      </TouchableOpacity>
-    </View>
+    <TouchableOpacity
+      style={[styles.logoutButton, styles.row]}
+      onPress={onLogoutPress}>
+      <View style={[styles.row, styles.alignCenter]}>
+        <Text style={[styles.buttonText]}>Logout</Text>
+        <MaterialIcons
+          style={[styles.buttonText, styles.icon]}
+          name="logout"
+          size={20}
+        />
+      </View>
+    </TouchableOpacity>
   );
 }
