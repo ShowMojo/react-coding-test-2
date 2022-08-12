@@ -34,9 +34,14 @@ const removeLoggedInUser = async () => {
   await AsyncStorage.removeItem(asyncStorage_authUser);
 };
 
+const getTimezones = async () => {
+  return Axios.get(`${BASE_URL}/timezone_list`);
+};
+
 export default {
   asyncLogIn,
   setLoggedInUser,
   getLoggedInUser,
   removeLoggedInUser,
+  getTimezones,
 };

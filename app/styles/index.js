@@ -34,4 +34,11 @@ export default StyleSheet.create({
   buttonText: {
     color: '#FFFFFF',
   },
+  timeZoneItemContainer: {
+    marginVertical: 10,
+    marginHorizontal: 5,
+  },
+  blackText: {
+    color: '#000000',
+  },
 });

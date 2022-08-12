@@ -8,6 +8,9 @@ import {
   LOGOUT,
   logoutSuccess,
   LOG_IN_FAIL,
+  getTimezonesFailure,
+  getTimezonesSuccess,
+  GET_TIMEZONES,
 } from '../actions';
 import service from './service';
 
@@ -68,9 +71,30 @@ export function* loginError({error}) {
   }
 }
 
+export function* getTimezones() {
+  try {
+    const res = yield call(service.getTimezones);
+
+    if (res.status === 200) {
+      const {data} = res;
+      if (data.code === 0) {
+        yield call(service.setLoggedInUser, {isLoggedIn: true});
+        yield put(getTimezonesSuccess(data.data));
+      } else {
+        yield put(getTimezonesFailure(data.error));
+      }
+    } else {
+      yield put(getTimezonesFailure(''));
+    }
+  } catch (error) {
+    yield put(getTimezonesFailure(''));
+  }
+}
+
 export default function* () {
   yield takeLatest(LOG_IN, getLogIn);
   yield takeLatest(CHECK_AUTH, checkAuth);
   yield takeLatest(LOGOUT, logoutAsync);
   yield takeEvery(LOG_IN_FAIL, loginError);
+  yield takeLatest(GET_TIMEZONES, getTimezones);
 }
