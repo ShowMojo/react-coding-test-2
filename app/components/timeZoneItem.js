@@ -2,11 +2,13 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from '../styles';
-const dayjs = require('dayjs');
-const utc = require('dayjs/plugin/utc');
-const timezone = require('dayjs/plugin/timezone');
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+
 dayjs.extend(utc);
 dayjs.extend(timezone);
+
 const getTimeByZones = zones => {
   const zone = zones[0];
   const currentTime = dayjs(Date.now()).tz(zone).format('hh:mm A');
