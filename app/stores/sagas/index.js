@@ -1,5 +1,17 @@
-import {put, takeLatest, call} from 'redux-saga/effects';
-import {LOG_IN, logInSuccess, logInFail} from '../actions';
+import {Alert, Platform, ToastAndroid} from 'react-native';
+import {put, takeLatest, call, takeEvery} from 'redux-saga/effects';
+import {
+  LOG_IN,
+  logInSuccess,
+  logInFail,
+  CHECK_AUTH,
+  LOGOUT,
+  logoutSuccess,
+  LOG_IN_FAIL,
+  getTimezonesFailure,
+  getTimezonesSuccess,
+  GET_TIMEZONES,
+} from '../actions';
 import service from './service';
 
 export function* getLogIn({payload}) {
@@ -10,6 +22,7 @@ export function* getLogIn({payload}) {
     if (res.status === 200) {
       const {data} = res;
       if (data.code === 0) {
+        yield call(service.setLoggedInUser, {isLoggedIn: true});
         yield put(logInSuccess());
         navigation.navigate('TimezoneListPage');
       } else {
@@ -23,6 +36,65 @@ export function* getLogIn({payload}) {
   }
 }
 
+export function* checkAuth({payload}) {
+  const {navigation} = payload;
+  try {
+    const res = yield call(service.getLoggedInUser);
+
+    if (!res) {
+      yield put(logInSuccess());
+      navigation.navigate('Auth');
+    } else {
+      navigation.navigate('App');
+    }
+  } catch (e) {
+    navigation.navigate('Auth');
+  }
+}
+
+export function* logoutAsync({payload}) {
+  const {navigation} = payload;
+  try {
+    yield call(service.removeLoggedInUser);
+    yield put(logoutSuccess());
+    navigation.navigate('Auth');
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export function* loginError({error}) {
+  if (Platform.OS === 'android') {
+    ToastAndroid.show(error, ToastAndroid.SHORT);
+  } else {
+    Alert.alert('Error', error);
+  }
+}
+
+export function* getTimezones() {
+  try {
+    const res = yield call(service.getTimezones);
+
+    if (res.status === 200) {
+      const {data} = res;
+      if (data.code === 0) {
+        yield call(service.setLoggedInUser, {isLoggedIn: true});
+        yield put(getTimezonesSuccess(data.data));
+      } else {
+        yield put(getTimezonesFailure(data.error));
+      }
+    } else {
+      yield put(getTimezonesFailure(''));
+    }
+  } catch (error) {
+    yield put(getTimezonesFailure(''));
+  }
+}
+
 export default function* () {
   yield takeLatest(LOG_IN, getLogIn);
+  yield takeLatest(CHECK_AUTH, checkAuth);
+  yield takeLatest(LOGOUT, logoutAsync);
+  yield takeEvery(LOG_IN_FAIL, loginError);
+  yield takeLatest(GET_TIMEZONES, getTimezones);
 }

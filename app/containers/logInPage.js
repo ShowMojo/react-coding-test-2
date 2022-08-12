@@ -1,5 +1,11 @@
 import React from 'react';
-import {View, Text, TextInput, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import styles from '../styles';
@@ -43,10 +49,15 @@ class LogInPage extends React.PureComponent {
         />
         <TouchableOpacity
           style={styles.button}
+          disabled={this.props.Store.isLoginFetching}
           onPress={() => {
             logIn({account, password, navigation});
           }}>
-          <Text style={styles.buttonText}>Log In</Text>
+          {this.props.Store.isLoginFetching ? (
+            <ActivityIndicator />
+          ) : (
+            <Text style={styles.buttonText}>Log In</Text>
+          )}
         </TouchableOpacity>
       </View>
     );

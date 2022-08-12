@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders TimeZoneItem 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "borderBottomColor": "#e9e9e1",
+        "borderBottomWidth": 1,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "paddingHorizontal": 25,
+        "paddingVertical": 30,
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "width": "70%",
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+          },
+          Object {
+            "fontSize": 16,
+            "fontWeight": "600",
+            "marginBottom": 2,
+          },
+        ]
+      }
+    >
+      UTC-02
+    </Text>
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#828282",
+          },
+          Object {
+            "fontSize": 12,
+          },
+        ]
+      }
+    >
+      (UTC-02:00) Coordinated Universal Time-02
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "height": 32,
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "fontSize": 30,
+            "fontWeight": "bold",
+          },
+        ]
+      }
+    >
+      03:22
+    </Text>
+    <Text
+      style={
+        Array [
+          Object {
+            "fontSize": 12,
+            "fontWeight": "500",
+            "marginTop": "auto",
+          },
+        ]
+      }
+    >
+      PM
+    </Text>
+  </View>
+</View>
+`;

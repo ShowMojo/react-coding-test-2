@@ -32,6 +32,7 @@ var app = http.createServer(function (req, res) {
           id: TimeZones[i].id,
           value: TimeZones[i].value,
           text: TimeZones[i].text,
+          zones: TimeZones[i].zones,
         });
       }
       resApiSuccess(res, data);
