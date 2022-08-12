@@ -27,6 +27,10 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  logoutButton: {
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+  },
   buttonText: {
     color: '#FFFFFF',
   },

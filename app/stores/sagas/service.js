@@ -30,8 +30,13 @@ const getLoggedInUser = async () => {
   return null;
 };
 
+const removeLoggedInUser = async () => {
+  await AsyncStorage.removeItem(asyncStorage_authUser);
+};
+
 export default {
   asyncLogIn,
   setLoggedInUser,
   getLoggedInUser,
+  removeLoggedInUser,
 };

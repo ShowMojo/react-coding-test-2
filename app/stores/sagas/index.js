@@ -1,5 +1,12 @@
 import {put, takeLatest, call} from 'redux-saga/effects';
-import {LOG_IN, logInSuccess, logInFail, CHECK_AUTH} from '../actions';
+import {
+  LOG_IN,
+  logInSuccess,
+  logInFail,
+  CHECK_AUTH,
+  LOGOUT,
+  logoutSuccess,
+} from '../actions';
 import service from './service';
 
 export function* getLogIn({payload}) {
@@ -28,7 +35,6 @@ export function* checkAuth({payload}) {
   const {navigation} = payload;
   try {
     const res = yield call(service.getLoggedInUser);
-    console.log(res);
 
     if (!res) {
       yield put(logInSuccess());
@@ -41,7 +47,19 @@ export function* checkAuth({payload}) {
   }
 }
 
+export function* logoutAsync({payload}) {
+  const {navigation} = payload;
+  try {
+    yield call(service.removeLoggedInUser);
+    yield put(logoutSuccess());
+    navigation.navigate('Auth');
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 export default function* () {
   yield takeLatest(LOG_IN, getLogIn);
   yield takeLatest(CHECK_AUTH, checkAuth);
+  yield takeLatest(LOGOUT, logoutAsync);
 }
