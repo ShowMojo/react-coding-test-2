@@ -10,19 +10,30 @@ import {
 
 const initialState = Immutable({
   isLoggedIn: false,
-  isFetching: false,
+  isLoginFetching: false,
   error: null,
 });
 
 export const reducers = {
   [LOG_IN]: state =>
-    Immutable.merge(state, {isLoggedIn: false, error: null, isFetching: true}),
+    Immutable.merge(state, {
+      isLoggedIn: false,
+      error: null,
+      isLoginFetching: true,
+    }),
   [LOG_IN_SUCCESS]: state =>
-    Immutable.merge(state, {isLoggedIn: true, error: null, isFetching: false}),
+    Immutable.merge(state, {
+      isLoggedIn: true,
+      error: null,
+      isLoginFetching: false,
+    }),
   [LOG_IN_FAIL]: (state, {error}) =>
-    Immutable.merge(state, {isLoggedIn: false, error, isFetching: false}),
+    Immutable.merge(state, {isLoggedIn: false, error, isLoginFetching: false}),
   [LOGOUT]: state => Immutable.merge(state, {}),
   [LOGOUT_SUCCESS]: state =>
-    Immutable.merge(state, {isLoggedIn: false, error: null, isFetching: false}),
+    Immutable.merge(state, {
+      isLoggedIn: false,
+      error: null,
+    }),
 };
 export default configReducer(initialState, reducers);

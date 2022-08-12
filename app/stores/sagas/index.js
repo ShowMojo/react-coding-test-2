@@ -1,4 +1,5 @@
-import {put, takeLatest, call} from 'redux-saga/effects';
+import {Alert, Platform, ToastAndroid} from 'react-native';
+import {put, takeLatest, call, takeEvery} from 'redux-saga/effects';
 import {
   LOG_IN,
   logInSuccess,
@@ -6,6 +7,7 @@ import {
   CHECK_AUTH,
   LOGOUT,
   logoutSuccess,
+  LOG_IN_FAIL,
 } from '../actions';
 import service from './service';
 
@@ -58,8 +60,17 @@ export function* logoutAsync({payload}) {
   }
 }
 
+export function* loginError({error}) {
+  if (Platform.OS === 'android') {
+    ToastAndroid.show(error, ToastAndroid.SHORT);
+  } else {
+    Alert.alert('Error', error);
+  }
+}
+
 export default function* () {
   yield takeLatest(LOG_IN, getLogIn);
   yield takeLatest(CHECK_AUTH, checkAuth);
   yield takeLatest(LOGOUT, logoutAsync);
+  yield takeEvery(LOG_IN_FAIL, loginError);
 }
