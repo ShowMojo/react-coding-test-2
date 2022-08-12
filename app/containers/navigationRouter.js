@@ -1,6 +1,6 @@
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
-import AuthLoadingPage from './AuthLoadingPage';
+import AuthLoadingPage from './authLoadingPage';
 import logInPage from './logInPage';
 import timezoneListPage from './timezoneListPage';
 
