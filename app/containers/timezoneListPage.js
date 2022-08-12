@@ -9,6 +9,10 @@ import TimeZoneItem from '../components/timeZoneItem';
 
 class TimezoneListPage extends React.PureComponent {
   static navigationOptions = () => ({
+    headerTitle: 'Time Zones',
+    headerTitleStyle: {
+      paddingTop: 15,
+    },
     headerRight: LogoutButtonComponent,
   });
 

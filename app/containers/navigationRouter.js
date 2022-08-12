@@ -7,6 +7,11 @@ import timezoneListPage from './timezoneListPage';
 const MainStack = createStackNavigator({
   TimezoneListPage: {
     screen: timezoneListPage,
+    navigationOptions: {
+      headerStyle: {
+        height: 50,
+      },
+    },
   },
 });
 

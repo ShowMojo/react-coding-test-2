@@ -28,8 +28,10 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   logoutButton: {
+    height: '100%',
     paddingHorizontal: 10,
     paddingVertical: 5,
+    paddingTop: 15,
   },
   buttonText: {
     color: '#FFFFFF',
@@ -40,5 +42,11 @@ export default StyleSheet.create({
   },
   blackText: {
     color: '#000000',
+  },
+  row: {
+    flexDirection: 'row',
+  },
+  icon: {
+    margin: 5,
   },
 });

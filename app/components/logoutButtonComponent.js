@@ -1,7 +1,8 @@
 import React from 'react';
-import {Alert, Pressable, Text, View} from 'react-native';
+import {Alert, Text, TouchableOpacity, View} from 'react-native';
 import globals from '../globals';
 import styles from '../styles';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 export default function LogoutButtonComponent() {
   const onLogoutPress = () => {
@@ -18,15 +19,17 @@ export default function LogoutButtonComponent() {
   };
   return (
     <View>
-      <Pressable
+      <TouchableOpacity
         style={[
           styles.containerCenterHorizontally,
           styles.containerCenterVertically,
           styles.logoutButton,
+          styles.row,
         ]}
         onPress={onLogoutPress}>
         <Text>Logout</Text>
-      </Pressable>
+        <MaterialIcons style={styles.icon} name="logout" size={20} />
+      </TouchableOpacity>
     </View>
   );
 }
